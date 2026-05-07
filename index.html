@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Return & Refund Center</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="header-label">Website Prototype</p>
+          <h1>Return & Refund Center</h1>
+          <p class="header-subtitle">
+            Marketplace-style return and refund flow with customer and seller views.
+          </p>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Experience switcher">
+          <button
+            class="mode-button is-active"
+            type="button"
+            data-mode="customer"
+            aria-selected="true"
+          >
+            Customer View
+          </button>
+          <button
+            class="mode-button"
+            type="button"
+            data-mode="admin"
+            aria-selected="false"
+          >
+            Seller/Admin View
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="experience is-active" id="customerExperience">
+        <div class="tabs" role="tablist" aria-label="Customer flow">
+          <button class="tab-button is-active" type="button" data-tab="orders">
+            Orders
+          </button>
+          <button class="tab-button" type="button" data-tab="request">
+            Return / Refund Request
+          </button>
+          <button class="tab-button" type="button" data-tab="status">
+            Request Status
+          </button>
+        </div>
+
+        <section class="tab-panel is-active" data-panel="orders">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>My Orders</h2>
+                <p class="panel-subtitle">
+                  Select an eligible item to start a return or refund request.
+                </p>
+              </div>
+              <span class="status-chip status-neutral">Delivered</span>
+            </div>
+
+            <article class="order-card">
+              <div class="order-summary">
+                <div>
+                  <strong>Order #RR-20481</strong>
+                  <p>Delivered on April 28, 2026</p>
+                </div>
+                <div class="order-meta">
+                  <span id="orderTotalValue">Total: ₱0.00</span>
+                  <span class="hidden" id="orderRefundValue"></span>
+                  <span>Return window until May 20</span>
+                </div>
+              </div>
+
+              <div class="item-list">
+                <article class="item-row" data-order-product="jacket">
+                  <div class="thumb thumb-jacket"></div>
+                  <div class="item-info">
+                    <strong>Cloudline Jacket</strong>
+                    <p>Sand / Medium</p>
+                    <p>Qty 1</p>
+                  </div>
+                  <div class="item-price" id="orderPrice-jacket">₱128.00</div>
+                  <div class="item-status">
+                    <span class="status-chip status-success" id="orderStatus-jacket">
+                      Eligible
+                    </span>
+                  </div>
+                  <button
+                    class="small-button primary"
+                    type="button"
+                    data-select-item="jacket"
+                    data-order-action="jacket"
+                  >
+                    Return / Refund
+                  </button>
+                </article>
+
+                <article class="item-row" data-order-product="denim">
+                  <div class="thumb thumb-denim"></div>
+                  <div class="item-info">
+                    <strong>Studio Denim</strong>
+                    <p>Ink / 30W</p>
+                    <p>Qty 2</p>
+                  </div>
+                  <div class="item-price" id="orderPrice-denim">₱84.00</div>
+                  <div class="item-status">
+                    <span class="status-chip status-success" id="orderStatus-denim">
+                      Eligible
+                    </span>
+                  </div>
+                  <button
+                    class="small-button primary"
+                    type="button"
+                    data-select-item="denim"
+                    data-order-action="denim"
+                  >
+                    Return / Refund
+                  </button>
+                </article>
+
+                <article class="item-row">
+                  <div class="thumb thumb-cap"></div>
+                  <div class="item-info">
+                    <strong>Atelier Cap</strong>
+                    <p>Slate / One Size</p>
+                    <p>Qty 1</p>
+                  </div>
+                  <div class="item-price">₱36.00</div>
+                  <div class="item-status">
+                    <span class="status-chip status-muted">Final Sale</span>
+                  </div>
+                  <button class="small-button disabled" type="button" disabled>
+                    Not Eligible
+                  </button>
+                </article>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="request">
+          <div class="panel empty-state" id="requestEmptyState">
+            <h3 class="empty-title">No Request Started</h3>
+            <p class="empty-copy">
+              Choose an item from the Orders tab to start a return or refund request.
+            </p>
+          </div>
+
+          <div class="request-layout hidden" id="requestContent">
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Return / Refund Request</h2>
+                  <p class="panel-subtitle">
+                    Complete the request details and submit for seller review.
+                  </p>
+                </div>
+                <span class="status-chip status-neutral" id="requestWindowChip">
+                  Window open
+                </span>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label">Selected Product</label>
+                <div class="selected-product" id="selectedProductCard">
+                  <div class="thumb" id="selectedThumb"></div>
+                  <div class="item-info">
+                    <strong id="selectedProductName">-</strong>
+                    <p id="selectedProductVariant">-</p>
+                    <p id="selectedProductPrice">-</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label">Request Type</label>
+                <div class="option-row">
+                  <button class="option-button" type="button" data-request-type="refund-only">
+                    Refund Only
+                  </button>
+                  <button class="option-button" type="button" data-request-type="return-refund">
+                    Return and Refund
+                  </button>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label">Quantity</label>
+                <div class="qty-row">
+                  <button class="qty-button" type="button" data-qty-action="decrease">-</button>
+                  <span id="quantityValue">0</span>
+                  <button class="qty-button" type="button" data-qty-action="increase">+</button>
+                </div>
+                <p class="help-text" id="quantityHelp">Select a product to continue.</p>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label">Reason for Request</label>
+                <div class="reason-grid">
+                  <button class="reason-button" type="button" data-reason="wrong-item">
+                    Wrong item received
+                  </button>
+                  <button class="reason-button" type="button" data-reason="damaged-item">
+                    Damaged item
+                  </button>
+                  <button class="reason-button" type="button" data-reason="missing-item">
+                    Missing item
+                  </button>
+                  <button class="reason-button" type="button" data-reason="not-described">
+                    Item not as described
+                  </button>
+                  <button class="reason-button" type="button" data-reason="change-mind">
+                    Change of mind
+                  </button>
+                  <button class="reason-button" type="button" data-reason="size-fit">
+                    Size does not fit
+                  </button>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label">Upload Proof</label>
+                <div class="upload-row">
+                  <label class="upload-box" for="proofInput">
+                    <span>Add Photo</span>
+                    <small>Up to 3 images</small>
+                  </label>
+                  <label class="upload-box" for="proofInput">
+                    <span>Add Photo</span>
+                    <small>Optional</small>
+                  </label>
+                  <label class="upload-box" for="proofInput">
+                    <span>Add Photo</span>
+                    <small>Optional</small>
+                  </label>
+                </div>
+                <input id="proofInput" type="file" accept="image/*" multiple />
+                <p class="help-text" id="proofHelp">Select a reason to see proof rules.</p>
+                <div class="proof-preview-grid hidden" id="requestProofPreviewGrid"></div>
+              </div>
+
+              <div class="section-block">
+                <label class="field-label" for="requestNote">Details</label>
+                <textarea
+                  id="requestNote"
+                  rows="4"
+                  placeholder="Describe the issue briefly."
+                ></textarea>
+              </div>
+
+              <p class="help-text validation-message" id="requestValidationMessage"></p>
+
+              <div class="form-actions">
+                <button class="small-button secondary" type="button" id="backToOrdersButton">
+                  Back to Orders
+                </button>
+                <button class="small-button primary" type="button" id="submitRequestButton">
+                  Submit Request
+                </button>
+              </div>
+            </div>
+
+            <aside class="panel summary-panel">
+              <div class="panel-header">
+                <div>
+                  <h2>Request Summary</h2>
+                  <p class="panel-subtitle">Review the request before submitting.</p>
+                </div>
+              </div>
+
+              <div class="summary-list">
+                <div class="summary-row">
+                  <span>Product</span>
+                  <strong id="summaryProduct">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Request Type</span>
+                  <strong id="summaryType">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Reason</span>
+                  <strong id="summaryReason">-</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Quantity</span>
+                  <strong id="summaryQty">0</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Proof Added</span>
+                  <strong id="summaryProof">0 files</strong>
+                </div>
+              </div>
+
+              <div class="note-box">
+                <strong>Details</strong>
+                <p class="help-text" id="summaryNote">No additional details provided.</p>
+              </div>
+
+              <div class="refund-box">
+                <div class="summary-row">
+                  <span>Refund Estimate</span>
+                  <strong id="summaryRefund">₱0.00</strong>
+                </div>
+                <p class="help-text" id="refundNote">
+                  Final refund amount is confirmed after seller review.
+                </p>
+              </div>
+
+              <div class="policy-box">
+                <strong>Reminder</strong>
+                <p>
+                  Some request types may require photo proof or the item to be returned
+                  before a refund is processed.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="status">
+          <div class="panel empty-state" id="statusEmptyState">
+            <h3 class="empty-title">No Submitted Request Yet</h3>
+            <p class="empty-copy">
+              Submit a return or refund request to track its status here.
+            </p>
+          </div>
+
+          <div class="panel hidden" id="statusContent">
+            <div class="panel-header">
+              <div>
+                <h2>Request Status</h2>
+                <p class="panel-subtitle">Track the progress of your latest request.</p>
+              </div>
+              <span class="status-chip status-pending" id="statusChip">
+                Pending Seller Response
+              </span>
+            </div>
+
+            <div class="status-summary">
+              <div>
+                <strong id="statusRequestId">Request ID: -</strong>
+                <p id="statusProductText">-</p>
+              </div>
+              <div>
+                <strong id="statusTypeText">-</strong>
+                <p id="statusReasonText">-</p>
+              </div>
+            </div>
+
+            <div class="summary-list status-detail-grid">
+              <div class="summary-row">
+                <span>Proof attached</span>
+                <strong id="statusProofText">0 files</strong>
+              </div>
+            </div>
+
+            <div class="proof-preview-grid hidden" id="statusProofPreviewGrid"></div>
+
+            <div class="note-box status-note-box">
+              <strong>Submitted details</strong>
+              <p class="help-text" id="statusNoteText">-</p>
+            </div>
+
+            <div class="status-list">
+              <div class="status-step is-complete">
+                <span class="status-dot"></span>
+                <div>
+                  <strong>Request Submitted</strong>
+                  <p>Your request has been sent successfully.</p>
+                </div>
+              </div>
+              <div class="status-step" id="currentStatusStep">
+                <span class="status-dot"></span>
+                <div>
+                  <strong id="currentStatusTitle">Pending Seller Response</strong>
+                  <p id="currentStatusMessage">
+                    Please wait while the seller reviews your request.
+                  </p>
+                </div>
+              </div>
+              <div class="status-step" id="returnStep">
+                <span class="status-dot"></span>
+                <div>
+                  <strong>Please Return Item</strong>
+                  <p>Return instructions will appear here if your request is approved.</p>
+                </div>
+              </div>
+              <div class="status-step" id="refundStep">
+                <span class="status-dot"></span>
+                <div>
+                  <strong>Refund Completed</strong>
+                  <p>Your refund status will appear here after processing.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="next-action-box">
+              <strong>Next Action</strong>
+              <p id="nextActionText">Wait for seller review.</p>
+            </div>
+
+            <div class="form-actions">
+              <button class="small-button secondary" type="button" id="backToRequestButton">
+                Back to Orders
+              </button>
+              <button class="small-button primary" type="button" id="openAdminButton">
+                Open Seller/Admin View
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="experience" id="adminExperience">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Seller / Admin Return Requests</h2>
+              <p class="panel-subtitle">
+                Review customer requests, check proof, and update statuses.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-filters">
+            <button class="filter-button is-active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="pending">Pending</button>
+            <button class="filter-button" type="button" data-filter="approved">Approved</button>
+            <button class="filter-button" type="button" data-filter="rejected">Rejected</button>
+          </div>
+        </div>
+
+        <div class="admin-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Request List</h2>
+                <p class="panel-subtitle">Simple queue view for review and action.</p>
+              </div>
+            </div>
+
+            <div class="admin-metrics">
+              <div class="metric-box">
+                <strong id="metricPending">0</strong>
+                <span>Pending</span>
+              </div>
+              <div class="metric-box">
+                <strong id="metricApproved">0</strong>
+                <span>Approved</span>
+              </div>
+              <div class="metric-box">
+                <strong id="metricRejected">0</strong>
+                <span>Rejected</span>
+              </div>
+            </div>
+
+            <div class="request-list" id="requestList"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h2 id="adminCaseTitle">No request selected</h2>
+                <p class="panel-subtitle">Request details and proof review.</p>
+              </div>
+              <span class="status-chip status-neutral" id="adminCaseStatus">-</span>
+            </div>
+
+            <div class="detail-grid">
+              <div class="detail-row">
+                <span>Order</span>
+                <strong id="adminOrderValue">-</strong>
+              </div>
+              <div class="detail-row">
+                <span>Customer</span>
+                <strong id="adminCustomerValue">-</strong>
+              </div>
+              <div class="detail-row">
+                <span>Product</span>
+                <strong id="adminProductValue">-</strong>
+              </div>
+              <div class="detail-row">
+                <span>Request Type</span>
+                <strong id="adminTypeValue">-</strong>
+              </div>
+              <div class="detail-row">
+                <span>Reason</span>
+                <strong id="adminReasonValue">-</strong>
+              </div>
+              <div class="detail-row">
+                <span>Refund Amount</span>
+                <strong id="adminAmountValue">₱0.00</strong>
+              </div>
+            </div>
+
+            <div class="proof-section">
+              <label class="field-label">Proof</label>
+              <div class="proof-preview-grid" id="adminProofPreviewGrid"></div>
+              <p class="help-text" id="adminProofText">No proof attached.</p>
+            </div>
+
+            <div class="note-section">
+              <label class="field-label">Customer Note</label>
+              <div class="note-box" id="adminNoteText">No details provided.</div>
+            </div>
+
+            <div class="form-actions">
+              <button class="small-button secondary" type="button" id="adminRejectButton">
+                Reject
+              </button>
+              <button class="small-button secondary" type="button" id="adminMoreInfoButton">
+                Request More Info
+              </button>
+              <button class="small-button primary" type="button" id="adminApproveButton">
+                Approve
+              </button>
+              <button class="small-button primary" type="button" id="adminRefundButton">
+                Mark Refunded
+              </button>
+            </div>
+
+            <p class="help-text inline-feedback" id="adminActionMessage"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal-overlay hidden" id="confirmationDialog" aria-hidden="true">
+      <div
+        class="modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmationTitle"
+        aria-describedby="confirmationMessage"
+      >
+        <div class="modal-header">
+          <h2 id="confirmationTitle">Confirm Action</h2>
+        </div>
+        <p class="modal-message" id="confirmationMessage">
+          Please review this action before continuing.
+        </p>
+        <div class="modal-actions">
+          <button class="small-button secondary" type="button" id="confirmationCancelButton">
+            Cancel
+          </button>
+          <button class="small-button primary" type="button" id="confirmationConfirmButton">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
