@@ -289,18 +289,10 @@ textarea:disabled {
   height: 56px;
   border-radius: 6px;
   flex: 0 0 auto;
-}
-
-.thumb-jacket {
-  background: linear-gradient(135deg, #d5c6b5, #b49b7a);
-}
-
-.thumb-denim {
-  background: linear-gradient(135deg, #355070, #5c7da1);
-}
-
-.thumb-cap {
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  background-color: #f3f4f6;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .item-info {

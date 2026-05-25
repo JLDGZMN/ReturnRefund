@@ -4,36 +4,159 @@ const money = new Intl.NumberFormat("en-PH", {
 });
 
 const products = {
-  jacket: {
-    id: "jacket",
-    name: "Cloudline Jacket",
-    variant: "Sand / Medium",
-    price: 128,
+  tshirt: {
+    id: "tshirt",
+    name: "White T-Shirt",
+    variant: "White / Medium",
+    price: 199,
     maxQty: 1,
-    thumbClass: "thumb-jacket",
+    image:
+      "https://images.pexels.com/photos/18186105/pexels-photo-18186105.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
-  denim: {
-    id: "denim",
-    name: "Studio Denim",
-    variant: "Ink / 30W",
-    price: 84,
-    maxQty: 2,
-    thumbClass: "thumb-denim",
+  hoodie: {
+    id: "hoodie",
+    name: "Black Hoodie",
+    variant: "Black / Large",
+    price: 499,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/5952647/pexels-photo-5952647.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  jeans: {
+    id: "jeans",
+    name: "Denim Jeans",
+    variant: "Blue / 30W",
+    price: 650,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/4109797/pexels-photo-4109797.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  shoes: {
+    id: "shoes",
+    name: "Rubber Shoes",
+    variant: "White / Size 8",
+    price: 1200,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/20298290/pexels-photo-20298290.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   cap: {
     id: "cap",
-    name: "Atelier Cap",
-    variant: "Slate / One Size",
-    price: 36,
+    name: "Baseball Cap",
+    variant: "Black",
+    price: 150,
     maxQty: 1,
-    thumbClass: "thumb-cap",
+    image:
+      "https://images.pexels.com/photos/12712906/pexels-photo-12712906.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  tote: {
+    id: "tote",
+    name: "Tote Bag",
+    variant: "Beige",
+    price: 180,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/35685400/pexels-photo-35685400.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  mouse: {
+    id: "mouse",
+    name: "Wireless Mouse",
+    variant: "Black",
+    price: 350,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/7151703/pexels-photo-7151703.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  phonecase: {
+    id: "phonecase",
+    name: "Phone Case",
+    variant: "Clear / iPhone 13",
+    price: 120,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/7360460/pexels-photo-7360460.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  bottle: {
+    id: "bottle",
+    name: "Water Bottle",
+    variant: "Blue / 1L",
+    price: 220,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/8217497/pexels-photo-8217497.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  backpack: {
+    id: "backpack",
+    name: "School Backpack",
+    variant: "Gray",
+    price: 799,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/3731256/pexels-photo-3731256.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  pens: {
+    id: "pens",
+    name: "Ballpen Set",
+    variant: "Black Ink",
+    price: 89,
+    maxQty: 2,
+    image:
+      "https://images.pexels.com/photos/7054783/pexels-photo-7054783.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  notebook: {
+    id: "notebook",
+    name: "Notebook",
+    variant: "A5 / 80 Pages",
+    price: 45,
+    maxQty: 3,
+    image:
+      "https://images.pexels.com/photos/27618082/pexels-photo-27618082.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  slippers: {
+    id: "slippers",
+    name: "Slippers",
+    variant: "Gray / Size 7",
+    price: 250,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/14820514/pexels-photo-14820514.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  jacket: {
+    id: "jacket",
+    name: "Jacket",
+    variant: "Brown / Medium",
+    price: 850,
+    maxQty: 1,
+    image:
+      "https://images.pexels.com/photos/6454668/pexels-photo-6454668.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  socks: {
+    id: "socks",
+    name: "Socks Pack",
+    variant: "White",
+    price: 99,
+    maxQty: 3,
+    image:
+      "https://images.pexels.com/photos/12983150/pexels-photo-12983150.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
 };
 
 const orderItems = [
-  { productId: "jacket", qty: 1 },
-  { productId: "denim", qty: 2 },
+  { productId: "tshirt", qty: 1 },
+  { productId: "hoodie", qty: 1 },
+  { productId: "jeans", qty: 1 },
+  { productId: "shoes", qty: 1 },
   { productId: "cap", qty: 1 },
+  { productId: "tote", qty: 1 },
+  { productId: "mouse", qty: 1 },
+  { productId: "phonecase", qty: 1 },
+  { productId: "bottle", qty: 1 },
+  { productId: "backpack", qty: 1 },
+  { productId: "pens", qty: 2 },
+  { productId: "notebook", qty: 3 },
+  { productId: "slippers", qty: 1 },
+  { productId: "jacket", qty: 1 },
+  { productId: "socks", qty: 3 },
 ];
 
 const reasonMap = {
@@ -52,6 +175,14 @@ const requestTypeMap = {
 
 function formatMoney(value) {
   return money.format(value);
+}
+
+function buildThumbStyle(product) {
+  if (!product?.image) {
+    return "";
+  }
+
+  return `background-image: url('${product.image}')`;
 }
 
 function clamp(value, min, max) {
@@ -181,7 +312,7 @@ const state = {
       id: "RET-1883",
       order: "ORD-88214",
       customer: "Mia Carter",
-      productId: "jacket",
+      productId: "hoodie",
       qty: 1,
       requestTypeKey: "refund-only",
       reasonKey: "damaged-item",
@@ -193,7 +324,7 @@ const state = {
       id: "RET-1884",
       order: "ORD-88227",
       customer: "Ethan Park",
-      productId: "denim",
+      productId: "backpack",
       qty: 1,
       requestTypeKey: "return-refund",
       reasonKey: "size-fit",
@@ -205,7 +336,7 @@ const state = {
       id: "RET-1885",
       order: "ORD-88231",
       customer: "Lena Torres",
-      productId: "jacket",
+      productId: "shoes",
       qty: 1,
       requestTypeKey: "refund-only",
       reasonKey: "missing-item",
@@ -223,19 +354,14 @@ const experiences = {
 };
 const tabButtons = document.querySelectorAll("[data-tab]");
 const tabPanels = document.querySelectorAll("[data-panel]");
-const selectItemButtons = document.querySelectorAll("[data-select-item]");
-const orderActionButtons = document.querySelectorAll("[data-order-action]");
 const requestTypeButtons = document.querySelectorAll("[data-request-type]");
 const reasonButtons = document.querySelectorAll("[data-reason]");
 const qtyButtons = document.querySelectorAll("[data-qty-action]");
 const filterButtons = document.querySelectorAll("[data-filter]");
 
+const orderItemList = document.getElementById("orderItemList");
 const orderTotalValue = document.getElementById("orderTotalValue");
 const orderRefundValue = document.getElementById("orderRefundValue");
-const orderStatusJacket = document.getElementById("orderStatus-jacket");
-const orderStatusDenim = document.getElementById("orderStatus-denim");
-const orderPriceJacket = document.getElementById("orderPrice-jacket");
-const orderPriceDenim = document.getElementById("orderPrice-denim");
 const requestEmptyState = document.getElementById("requestEmptyState");
 const requestContent = document.getElementById("requestContent");
 const selectedThumb = document.getElementById("selectedThumb");
@@ -616,6 +742,41 @@ function statusClassFor(status) {
   return "status-pending";
 }
 
+function renderOrderRows() {
+  orderItemList.innerHTML = orderItems
+    .map((item) => {
+      const product = products[item.productId];
+      const matchingCase = getLatestCustomerCaseForProduct(item.productId);
+      const presentation = getOrderStatusPresentation(matchingCase);
+
+      return `
+        <article class="item-row" data-order-product="${product.id}">
+          <div class="thumb" style="${buildThumbStyle(product)}"></div>
+          <div class="item-info">
+            <strong>${product.name}</strong>
+            <p>${product.variant}</p>
+            <p>Qty ${item.qty}</p>
+          </div>
+          <div class="item-price">${formatMoney(product.price)}</div>
+          <div class="item-status">
+            <span class="status-chip ${presentation.chipClass}">
+              ${presentation.chipText}
+            </span>
+          </div>
+          <button
+            class="small-button primary"
+            type="button"
+            data-select-item="${product.id}"
+            data-order-action="${product.id}"
+          >
+            ${matchingCase ? "View Request" : "Return / Refund"}
+          </button>
+        </article>
+      `;
+    })
+    .join("");
+}
+
 function renderProofGrid(container, proofItems = [], fallbackCount = 0) {
   const items = normalizeProofItems(proofItems);
 
@@ -716,8 +877,7 @@ function renderOrdersPanel() {
   const refundedTotal = getCompletedRefundTotal();
   const netTotal = Math.max(baseTotal - refundedTotal, 0);
 
-  orderPriceJacket.textContent = formatMoney(products.jacket.price);
-  orderPriceDenim.textContent = formatMoney(products.denim.price);
+  renderOrderRows();
   orderTotalValue.textContent =
     refundedTotal > 0
       ? `Total after refunds: ${formatMoney(netTotal)}`
@@ -725,21 +885,6 @@ function renderOrdersPanel() {
   orderRefundValue.textContent =
     refundedTotal > 0 ? `Completed refunds: -${formatMoney(refundedTotal)}` : "";
   orderRefundValue.classList.toggle("hidden", refundedTotal <= 0);
-
-  const jacketCase = getLatestCustomerCaseForProduct("jacket");
-  const denimCase = getLatestCustomerCaseForProduct("denim");
-  const jacketPresentation = getOrderStatusPresentation(jacketCase);
-  const denimPresentation = getOrderStatusPresentation(denimCase);
-
-  orderStatusJacket.className = `status-chip ${jacketPresentation.chipClass}`;
-  orderStatusJacket.textContent = jacketPresentation.chipText;
-  orderStatusDenim.className = `status-chip ${denimPresentation.chipClass}`;
-  orderStatusDenim.textContent = denimPresentation.chipText;
-
-  orderActionButtons.forEach((button) => {
-    const matchingCase = getLatestCustomerCaseForProduct(button.dataset.orderAction);
-    button.textContent = matchingCase ? "View Request" : "Return / Refund";
-  });
 }
 
 function renderCustomerTabs() {
@@ -787,7 +932,10 @@ function renderRequestPanel() {
   const product = products[draft.productId];
   const validation = validateDraft(draft);
 
-  selectedThumb.className = `thumb ${product.thumbClass}`;
+  selectedThumb.className = "thumb";
+  selectedThumb.style.backgroundImage = product.image
+    ? `url("${product.image}")`
+    : "";
   selectedProductName.textContent = product.name;
   selectedProductVariant.textContent = product.variant;
   selectedProductPrice.textContent = formatMoney(product.price);
@@ -1264,21 +1412,25 @@ tabButtons.forEach((button) => {
   });
 });
 
-selectItemButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const productId = button.dataset.selectItem;
-    const existingCase = getLatestCustomerCaseForProduct(productId);
+orderItemList.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-select-item]");
 
-    if (existingCase) {
-      state.customer.submittedRequestId = existingCase.id;
-      setCustomerTab("status");
-      clearAdminActionMessage();
-      renderAll();
-      return;
-    }
+  if (!button) {
+    return;
+  }
 
-    startRequest(productId);
-  });
+  const productId = button.dataset.selectItem;
+  const existingCase = getLatestCustomerCaseForProduct(productId);
+
+  if (existingCase) {
+    state.customer.submittedRequestId = existingCase.id;
+    setCustomerTab("status");
+    clearAdminActionMessage();
+    renderAll();
+    return;
+  }
+
+  startRequest(productId);
 });
 
 requestTypeButtons.forEach((button) => {
