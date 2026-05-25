@@ -38,7 +38,7 @@ const products = {
     price: 1200,
     maxQty: 1,
     image:
-      "https://images.pexels.com/photos/20298290/pexels-photo-20298290.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/11324525/pexels-photo-11324525.jpeg?auto=compress&cs=tinysrgb&w=600",
   },
   cap: {
     id: "cap",
