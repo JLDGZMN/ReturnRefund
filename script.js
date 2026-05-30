@@ -3,6 +3,12 @@ const money = new Intl.NumberFormat("en-PH", {
   currency: "PHP",
 });
 
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
 const products = {
   tshirt: {
     id: "tshirt",
@@ -175,6 +181,17 @@ const requestTypeMap = {
 
 function formatMoney(value) {
   return money.format(value);
+}
+
+function getRelativeDate(daysFromToday) {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  date.setDate(date.getDate() + daysFromToday);
+  return date;
+}
+
+function formatDate(value) {
+  return dateFormatter.format(value);
 }
 
 function buildThumbStyle(product) {
@@ -362,6 +379,8 @@ const filterButtons = document.querySelectorAll("[data-filter]");
 const orderItemList = document.getElementById("orderItemList");
 const orderTotalValue = document.getElementById("orderTotalValue");
 const orderRefundValue = document.getElementById("orderRefundValue");
+const deliveredDateText = document.getElementById("deliveredDateText");
+const returnWindowText = document.getElementById("returnWindowText");
 const requestEmptyState = document.getElementById("requestEmptyState");
 const requestContent = document.getElementById("requestContent");
 const selectedThumb = document.getElementById("selectedThumb");
@@ -872,11 +891,23 @@ function renderMode() {
   });
 }
 
+function renderOrderDates() {
+  const deliveredDate = getRelativeDate(-2);
+  const returnWindowStart = getRelativeDate(0);
+  const returnWindowEnd = getRelativeDate(5);
+
+  deliveredDateText.textContent = `Delivered on ${formatDate(deliveredDate)}`;
+  returnWindowText.textContent = `Return window: ${formatDate(
+    returnWindowStart,
+  )} to ${formatDate(returnWindowEnd)}`;
+}
+
 function renderOrdersPanel() {
   const baseTotal = getOrderTotal();
   const refundedTotal = getCompletedRefundTotal();
   const netTotal = Math.max(baseTotal - refundedTotal, 0);
 
+  renderOrderDates();
   renderOrderRows();
   orderTotalValue.textContent =
     refundedTotal > 0
